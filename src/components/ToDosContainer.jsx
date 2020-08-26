@@ -8,7 +8,8 @@ class ToDosContainer extends Component {
 
   formSubmitted = (e) => {
     e.preventDefault();
-    this.state.textInput !== '' && this.props.addItem(this.state.textInput);
+    this.state.textInput.trim() !== '' &&
+      this.props.addItem(this.state.textInput);
     this.setState({ textInput: '' });
   };
 
