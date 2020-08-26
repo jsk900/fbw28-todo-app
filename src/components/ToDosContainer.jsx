@@ -14,9 +14,16 @@ class ToDosContainer extends Component {
   };
 
   render() {
-    const { toDos, updateItem } = this.props;
+    const { toDos, updateItem, deleteItem } = this.props;
     const todoItems = toDos.map((todo) => {
-      return <TodoItem key={todo.id} todo={todo} updateItem={updateItem} />;
+      return (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          updateItem={updateItem}
+          deleteItem={deleteItem}
+        />
+      );
     });
 
     return (

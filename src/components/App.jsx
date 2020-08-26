@@ -41,6 +41,10 @@ class App extends Component {
     this.setState({ items: updatedItems });
   };
 
+  deleteItem = (id) => {
+    this.setState({ items: this.state.items.filter((item) => item.id !== id) });
+  };
+
   render() {
     const toDones = this.state.items.filter((item) => item.done === true);
     const toDos = this.state.items.filter((item) => item.done === false);
@@ -52,8 +56,13 @@ class App extends Component {
           toDos={toDos}
           addItem={this.addItem}
           updateItem={this.updateItem}
+          deleteItem={this.deleteItem}
         />
-        <ToDonesContainer toDones={toDones} updateItem={this.updateItem} />
+        <ToDonesContainer
+          toDones={toDones}
+          updateItem={this.updateItem}
+          deleteItem={this.deleteItem}
+        />
       </div>
     );
   }

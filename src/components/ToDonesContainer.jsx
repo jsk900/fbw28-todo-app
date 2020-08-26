@@ -1,9 +1,16 @@
 import React from 'react';
 import ToDoneItem from './ToDoneItem';
 
-const ToDonesContainer = ({ toDones, updateItem }) => {
+const ToDonesContainer = ({ toDones, updateItem, deleteItem }) => {
   const toDonesItems = toDones.map((done) => {
-    return <ToDoneItem key={done.id} done={done} updateItem={updateItem} />;
+    return (
+      <ToDoneItem
+        key={done.id}
+        done={done}
+        updateItem={updateItem}
+        deleteItem={deleteItem}
+      />
+    );
   });
 
   return (
