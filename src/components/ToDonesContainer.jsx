@@ -1,14 +1,7 @@
 import React from 'react';
 
-const ToDonesContainer = () => {
-  const todones = [
-    { text: 'create a website', done: true },
-    { text: 'Dinner completed', done: true },
-    { text: 'Finished reading my book', done: true },
-    { text: 'completed my homework', done: true },
-  ];
-
-  const toDonesItems = todones.map((done) => {
+const ToDonesContainer = ({ toDones }) => {
+  const toDonesItems = toDones.map((done) => {
     return (
       <div className='todones-item'>
         <p>{done.text}</p>

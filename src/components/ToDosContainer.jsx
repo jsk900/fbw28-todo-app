@@ -1,27 +1,7 @@
 import React from 'react';
 
-const ToDosContainer = () => {
-  const todos = [
-    {
-      text: 'Wash my face',
-      done: false,
-    },
-    {
-      text: 'Go shopping',
-      done: false,
-    },
-
-    {
-      text: 'Clean the house',
-      done: false,
-    },
-    {
-      text: 'Build an App',
-      done: false,
-    },
-  ];
-
-  const todoItems = todos.map((todo) => {
+const ToDosContainer = ({ toDos }) => {
+  const todoItems = toDos.map((todo) => {
     return (
       <div className='todo-item'>
         <p>{todo.text}</p>
