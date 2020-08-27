@@ -6,17 +6,13 @@ import ToDonesContainer from './ToDonesContainer';
 
 class App extends Component {
   state = {
-    items: [
-      { id: 0, text: 'Wash my face', done: false },
-      { id: 1, text: 'Go shopping', done: false },
-      { id: 2, text: 'Clean the house', done: false },
-      { id: 3, text: 'Build an App', done: false },
-      { id: 4, text: 'create a website', done: true },
-      { id: 5, text: 'Dinner completed', done: true },
-      { id: 6, text: 'Finished reading my book', done: true },
-      { id: 7, text: 'completed my homework', done: true },
-    ],
+    items: [],
   };
+
+  componentDidMount() {
+    localStorage.getItem('todo-app') &&
+      this.setState({ items: JSON.parse(localStorage.getItem('todo-app')) });
+  }
 
   addItem = (inputText) => {
     const item = {
@@ -24,9 +20,14 @@ class App extends Component {
       text: inputText,
       done: false,
     };
-    this.setState({
-      items: [...this.state.items, item],
-    });
+    this.setState(
+      {
+        items: [...this.state.items, item],
+      },
+      () => {
+        localStorage.setItem('todo-app', JSON.stringify(this.state.items));
+      }
+    );
   };
 
   updateItem = (id) => {
@@ -38,11 +39,18 @@ class App extends Component {
         return item;
       }
     });
-    this.setState({ items: updatedItems });
+    this.setState({ items: updatedItems }, () => {
+      localStorage.setItem('todo-app', JSON.stringify(this.state.items));
+    });
   };
 
   deleteItem = (id) => {
-    this.setState({ items: this.state.items.filter((item) => item.id !== id) });
+    this.setState(
+      { items: this.state.items.filter((item) => item.id !== id) },
+      () => {
+        localStorage.setItem('todo-app', JSON.stringify(this.state.items));
+      }
+    );
   };
 
   render() {
