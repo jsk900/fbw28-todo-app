@@ -3,6 +3,9 @@ import '../css/App.css';
 import Navigation from './Navigation';
 import ToDosContainer from './ToDosContainer';
 import ToDonesContainer from './ToDonesContainer';
+import Help from './Help';
+import NotFound from './NotFound';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -58,20 +61,29 @@ class App extends Component {
     const toDos = this.state.items.filter((item) => item.done === false);
 
     return (
-      <div className='app'>
-        <Navigation />
-        <ToDosContainer
-          toDos={toDos}
-          addItem={this.addItem}
-          updateItem={this.updateItem}
-          deleteItem={this.deleteItem}
-        />
-        <ToDonesContainer
-          toDones={toDones}
-          updateItem={this.updateItem}
-          deleteItem={this.deleteItem}
-        />
-      </div>
+      <BrowserRouter>
+        <div className='app'>
+          <Navigation />
+          <Switch>
+            <Route exact path='/'>
+              <ToDosContainer
+                toDos={toDos}
+                addItem={this.addItem}
+                updateItem={this.updateItem}
+                deleteItem={this.deleteItem}
+              />
+              <ToDonesContainer
+                toDones={toDones}
+                updateItem={this.updateItem}
+                deleteItem={this.deleteItem}
+              />
+            </Route>
+
+            <Route exact path='/help' component={Help} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
